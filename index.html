@@ -210,9 +210,12 @@ main{max-width:920px; margin:0 auto; padding:0 20px 40px; min-height:64vh}
 .shotbox{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px; max-width:min(560px,100%); box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .shottip{margin:0 0 11px; font-size:.86rem; color:var(--ink-2); line-height:1.55}
 .shotbox img{width:100%; border:1px solid var(--line); border-radius:9px; background:#fff}
+a.btn{text-decoration:none; display:inline-block}
+#shotpad.hot{background:var(--badge); border-color:var(--badge); color:#fff}
+.padurl{margin:9px 0 0; font-size:.75rem; color:var(--ink-3); word-break:break-all; line-height:1.5}
 .shotstat{margin:10px 0 0; font-size:.85rem; font-weight:600; color:var(--ok); min-height:1.2em}
 .shotstat.err{color:var(--no)}
-.shotacts{display:flex; gap:8px; margin-top:11px}
+.shotacts{display:flex; flex-wrap:wrap; gap:8px; margin-top:11px}
 .shotacts .btn{text-decoration:none; display:inline-block}
 
 /* ---------- teacher ---------- */
@@ -368,8 +371,9 @@ main{max-width:920px; margin:0 auto; padding:0 20px 40px; min-height:64vh}
         <p style="margin:10px 0 0; font-size:.8rem; color:var(--ink-3)">2번과 7번은 스스로 채우는 활동이라 점수에는 넣지 않습니다.</p>
         <div class="mysum" id="mysum"></div>
         <div class="acts">
-          <button class="btn" id="copy" type="button">결과 복사하기</button>
-          <button class="btn ghost" id="saveimg" type="button">결과 이미지 저장</button>
+          <button class="btn" id="saveimg" type="button">결과 이미지 저장 → 패들렛 올리기</button>
+          <button class="btn ghost" id="copy" type="button">결과 복사하기</button>
+          <a class="btn ghost" id="padlink" href="https://padlet.com/songryems/padlet-s023cen12j8f4nvvxyf5" target="_blank" rel="noopener">패들렛에 올리러 가기 →</a>
           <button class="btn ghost" id="reset" type="button">처음부터 다시</button>
         </div>
         <p style="margin:12px 0 0; font-size:.8rem; color:var(--ink-3)">답은 이 기기에 자동으로 저장됩니다. 창을 닫았다 열어도 이어서 풀 수 있어요.</p>
@@ -397,7 +401,8 @@ main{max-width:920px; margin:0 auto; padding:0 20px 40px; min-height:64vh}
           <li>시간 배분(45분): 1~3 도입·개념 15분 · 4 적용 7분 · 5 핵심 11분 · 6 심화 5분 · 7 정리·창작 7분</li>
           <li>활동 7은 채점하지 않습니다. 힌트 단어를 눌러 문장에 넣을 수 있으니, 쓰기를 어려워하는 학생은 힌트부터 이어 붙여 문장을 만들게 하세요.</li>
           <li>아래쪽 점(●)을 눌러 이미 끝낸 쪽으로 되돌아갈 수 있습니다. 아직 못 푼 쪽으로는 건너뛰지 못합니다.</li>
-          <li>제출은 마지막 쪽의 <b>‘결과 이미지 저장’</b>으로 받습니다. 맨 위에 학번·이름이 찍힌 결과 카드 한 장이 만들어지니, 학급 패들렛·구글 클래스룸에 그대로 올리게 하세요. 자동 내려받기가 막힌 환경에서는 뜬 이미지를 꾹 눌러 저장하면 됩니다.</li>
+          <li>제출은 마지막 쪽의 <b>‘결과 이미지 저장 → 패들렛 올리기’</b>로 받습니다. 맨 위에 학번·이름이 찍힌 결과 카드 한 장이 만들어지고, 이어서 <b>패들렛으로 바로 가는 버튼</b>이 뜹니다. 자동 내려받기가 막힌 환경에서는 뜬 이미지를 꾹 눌러 저장하면 됩니다.</li>
+          <li>연결된 패들렛 주소: <code>https://padlet.com/songryems/padlet-s023cen12j8f4nvvxyf5</code> — 주소를 바꾸려면 파일에서 이 주소를 모두 찾아 바꾸면 됩니다.</li>
         </ul>
         <h4>예상 오개념과 대응</h4>
         <ul>
@@ -417,13 +422,15 @@ main{max-width:920px; margin:0 auto; padding:0 20px 40px; min-height:64vh}
 
 <div class="shotov" id="shotov" hidden>
   <div class="shotbox">
-    <p class="shottip">저장이 되지 않으면 이미지를 <b>꾹 누르거나</b> 마우스 <b>오른쪽 버튼</b>을 눌러 ‘이미지 저장’을 선택하세요.</p>
+    <p class="shottip"><b>① 이미지를 저장</b>한 뒤 <b>② 패들렛에 올려</b> 주세요. 저장이 되지 않으면 이미지를 꾹 누르거나 마우스 오른쪽 버튼을 눌러 ‘이미지 저장’을 선택하면 됩니다.</p>
     <img id="shotimg" alt="오늘의 학습 결과">
     <p class="shotstat" id="shotstat"></p>
     <div class="shotacts">
-      <a class="btn" id="shotdl" download="문화의속성_학습결과.png">이미지 저장</a>
+      <a class="btn" id="shotdl" download="문화의속성_학습결과.png">① 이미지 저장</a>
+      <a class="btn ghost" id="shotpad" href="https://padlet.com/songryems/padlet-s023cen12j8f4nvvxyf5" target="_blank" rel="noopener">② 패들렛에 올리러 가기 →</a>
       <button class="btn ghost" id="shotclose" type="button">닫기</button>
     </div>
+    <p class="padurl">버튼이 열리지 않으면 이 주소로 들어가세요 · <span>https://padlet.com/songryems/padlet-s023cen12j8f4nvvxyf5</span></p>
   </div>
 </div>
 
@@ -910,7 +917,7 @@ function drawResult(){
   return cv;
 }
 
-var ov=$("#shotov"), stat=$("#shotstat"), lastBlob=null, lastName="학습결과.png";
+var ov=$("#shotov"), stat=$("#shotstat"), lastBlob=null, lastName="학습결과.png", blobURL=null;
 
 /* 웹 링크로 열었을 때 쓰는 저장 통로 — 미리 준비해 둔다 */
 var dlNS=null;
@@ -923,19 +930,20 @@ var dlNS=null;
 })();
 
 function say(msg,bad){ stat.textContent=msg||""; stat.className="shotstat"+(bad?" err":""); }
+function hotPad(){ var b=$("#shotpad"); if(b) b.className="btn hot"; }
 
 function doSave(){
   if(dlNS && lastBlob){
     say("저장할지 물어볼 거예요…");
     dlNS.save({filename:lastName, data:lastBlob}).then(function(){
-      say("저장했어요 ✓");
+      say("저장했어요 ✓ 이제 패들렛에 올려 주세요."); hotPad();
     },function(err){
       var c=err&&err.code;
       if(c==="declined"){ say(""); return; }
       say("자동 저장이 안 됐어요. 이미지를 꾹 눌러 저장해 주세요.",true);
     });
   }else{
-    try{ $("#shotdl").click(); say("저장했어요 ✓"); }
+    try{ $("#shotdl").click(); say("저장했어요 ✓ 이제 패들렛에 올려 주세요."); hotPad(); }
     catch(e){ say("이미지를 꾹 눌러 저장해 주세요.",true); }
   }
 }
@@ -945,11 +953,18 @@ $("#saveimg").addEventListener("click",function(){
   try{ url=cv.toDataURL("image/png"); }
   catch(e){ flash("이미지를 만들지 못했어요. 다시 눌러 주세요."); return; }
   lastName="문화의속성_"+((S.cls||"학번").trim())+"_"+((S.nm||"이름").trim())+".png";
-  lastBlob=null; say("");
+  lastBlob=null; say(""); $("#shotpad").className="btn ghost";
   var a=$("#shotdl");
   $("#shotimg").src=url; a.href=url; a.setAttribute("download",lastName);
   ov.hidden=false;
-  if(cv.toBlob) cv.toBlob(function(b){ lastBlob=b; doSave(); },"image/png");
+  if(cv.toBlob) cv.toBlob(function(b){
+    lastBlob=b;
+    try{
+      if(blobURL) URL.revokeObjectURL(blobURL);
+      blobURL=URL.createObjectURL(b); a.href=blobURL;
+    }catch(e){}
+    doSave();
+  },"image/png");
   else doSave();
 });
 
